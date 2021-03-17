@@ -1,7 +1,8 @@
 ; this file is the configuration of your local gitea instance
 ; {{ ansible_managed }}
 ;
-; This file overwrites the default values from gitea.
+; This file overwrites the default values from gitea:
+; -> https://raw.githubusercontent.com/go-gitea/gitea/master/custom/conf/app.example.ini
 ; undefined variables will use the default value from gitea.
 ; Cheat Sheet: https://docs.gitea.io/en-us/config-cheat-sheet/
 ;
@@ -119,6 +120,15 @@ RECAPTCHA_SITEKEY                =
 SHOW_REGISTRATION_BUTTON         = {{ gitea_show_registration_button | ternary('true', 'false') }}
 ALLOW_ONLY_EXTERNAL_REGISTRATION = {{ gitea_only_allow_external_registration | ternary('true', 'false') }}
 ENABLE_NOTIFY_MAIL               = {{ gitea_enable_notify_mail | ternary('true', 'false') }}
+REGISTER_EMAIL_CONFIRM           = {{ gitea_register_email_confirm | ternary('true', 'false') }}
+REGISTER_MANUAL_CONFIRM          = {{ gitea_register_manual_confirm | ternary('true', 'false') }}
+ENABLE_USER_HEATMAP              = {{ gitea_enable_user_heatmap | ternary('true', 'false') }}
+{% if gitea_domain_whitelist is defined and gitea_domain_whitelist|length>0 %}
+EMAIL_DOMAIN_WHITELIST          = {{ gitea_domain_whitelist }}
+{% endif %}
+{% if gitea_domain_blocklist is defined and gitea_domain_blocklist|length>0 %}
+EMAIL_DOMAIN_BLOCKLIST          = {{ gitea_domain_blocklist }}
+{% endif %}
 
 [mailer]
 ENABLED            = {{ gitea_mailer_enabled | ternary('true', 'false') }}
