@@ -40,6 +40,7 @@
     mode: 'u=rwX,g=rX,o='
     recurse: true
   with_items:
+    - "{{ gitea_backup_path }}"
     - "{{ gitea_home }}"
     - "{{ gitea_home }}/data"
     - "{{ gitea_home }}/custom"
