@@ -30,7 +30,7 @@
     - name: Backing up gitea before upgrade
       command:
         cmd: "gitea dump -c /etc/gitea/gitea.ini"
-        chdir: /var/backups/
+        chdir: "{{ gitea_backup_path }}"
       become: true
       become_method: su
       become_user: "{{ gitea_user }}"
