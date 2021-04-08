@@ -106,6 +106,8 @@ DISABLE_GIT_HOOKS   = {{ gitea_disable_git_hooks | ternary('true', 'false') }}
 [service]
 ; Disallow registration, only allow admins to create accounts.
 DISABLE_REGISTRATION             = {{ gitea_disable_registration }}
+;
+DEFAULT_ALLOW_CREATE_ORGANIZATION = {{ gitea_default_allow_create_organization | ternary('true', 'false') }}
 ; User must sign in to view anything.
 REQUIRE_SIGNIN_VIEW              = {{ gitea_require_signin | ternary('true', 'false') }}
 ; Enable captcha validation for registration

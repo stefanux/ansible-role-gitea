@@ -48,6 +48,7 @@ gitea_disable_git_hooks: true
 gitea_show_user_email: false
 gitea_disable_gravatar: true
 gitea_disable_registration: false
+gitea_default_allow_create_organization: true
 gitea_show_registration_button: true
 gitea_require_signin: true
 gitea_enable_captcha: true
