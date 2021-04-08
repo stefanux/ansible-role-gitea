@@ -162,13 +162,22 @@ SENDMAIL_PATH      = sendmail
 
 [session]
 ; Either "memory", "file", or "redis", default is "memory"
-PROVIDER        = file
+PROVIDER        = {{ gitea_session_provider }}
 ; Provider config options
 ; memory: doesn't have any config yet
 ; file: session file path, e.g. `data/sessions`
 ; redis: network=tcp,addr=:6379,password=macaron,db=0,pool_size=100,idle_timeout=180
 ; mysql: go-sql-driver/mysql dsn config string, e.g. `root:password@/session_table`
-PROVIDER_CONFIG = {{ gitea_home }}/data/sessions
+
+{% if gitea_session_provider != "memory" %}
+  {% if gitea_session_provider_config is defined and gitea_session_provider_config|length>0 %}
+  PROVIDER_CONFIG = {{ gitea_session_provider_config }}
+  {% else %}
+   {% if gitea_session_provider == "file" %}
+   PROVIDER_CONFIG = {{ gitea_home }}/data/sessions
+   {% endif %}
+  {% endif %}
+{% endif %}
 
 [picture]
 AVATAR_UPLOAD_PATH = {{ gitea_home }}/data/avatars
